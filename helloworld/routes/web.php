@@ -22,3 +22,5 @@ Route::get('/alumnes', [AlumneController::class, 'llistat']);
 Route::get('/llibres', [LlibreController::class, 'index']);
 Route::get('/llibres/create', [LlibreController::class, 'create']);
 Route::post('/llibres/create', [LlibreController::class, 'guardar']);
+Route::get('/llibres/{id}', [LlibreController::class, 'detalles']);
+Route::get('/llibres/eliminar/{id}', [LlibreController::class, 'destroy']);

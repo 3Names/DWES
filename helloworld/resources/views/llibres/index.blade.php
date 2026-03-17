@@ -16,6 +16,7 @@
             	<th>ISBN</th>
             	<th>Pàgines</th>
             	<th>Preu</th>
+				<th>Acciones</th>
         	</tr>
     	</thead>
     	<tbody>
@@ -25,6 +26,10 @@
                 	<td>{{ $llibre->isbn }}</td>
                 	<td>{{ $llibre->pagines }}</td>
                 	<td>{{ $llibre->preu }} €</td>
+					<td>
+						<a href="/llibres/{{ $llibre->id }}" class="btn btn-info btn-sm">Veure</a>
+						<a href="/llibres/eliminar/{{ $llibre->id }}" class="btn btn-info btn-sm">Eliminar</a>
+					</td>
             	</tr>
         	@empty
             	<tr>
