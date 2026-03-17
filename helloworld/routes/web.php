@@ -20,3 +20,5 @@ Route::get('/salutacio-dinamica', [HolaController::class, 'saludar']);
 Route::get('/alumnes', [AlumneController::class, 'llistat']);
 
 Route::get('/llibres', [LlibreController::class, 'index']);
+Route::get('/llibres/create', [LlibreController::class, 'create']);
+Route::post('/llibres/create', [LlibreController::class, 'guardar']);

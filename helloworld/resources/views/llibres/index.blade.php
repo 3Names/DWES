@@ -8,7 +8,7 @@
 <body class="container mt-5">
 	<h1 class="mb-4">Llistat de Llibres</h1>
 	<h2 class="mb-4">Patricio Salazar Ccoa</h2>
-
+	<a href="/llibres/create" class="btn btn-success mb-3">Afegir un llibre nou</a>
 	<table class="table table-striped table-hover">
     	<thead class="table-dark">
         	<tr>

@@ -16,4 +16,22 @@ class LlibreController extends Controller
     	return view('llibres.index', ['llibres' => $totsElsLlibres]);
 	}
 
+    public function create() 
+    {
+        return view('llibres.create');
+    }
+
+    public function guardar(\Illuminate\Http\Request $request)
+    {
+        $nouLlibre = new \App\Models\Llibre();
+
+        $nouLlibre->titol = $request->input('titol');
+        $nouLlibre->isbn = $request->input('isbn');
+        $nouLlibre->pagines = $request->input('pagines');
+        $nouLlibre->preu = $request->input('preu');
+
+        $nouLlibre->save();
+
+        return redirect('/llibres');
+    }
 }
