@@ -33,7 +33,7 @@
             <input type="file" name="imatge" class="form-control">
         </div>
 
-        <button type="submit" class="btn btn-primary">Guardar a la biblioteca</button>
+        <button type="submit" class="btn btn-primary">Guardar en la videoteca</button>
         <a href="/peliculas" class="btn btn-link">Tornar enrere</a>
     </form>
 </body>

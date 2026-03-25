@@ -8,13 +8,13 @@
 <body class="container mt-5">
 	<h1 class="mb-4">Llistat de peliculas</h1>
 	<h2 class="mb-4">Patricio Salazar Ccoa</h2>
-	<a href="/peliculas/create" class="btn btn-success mb-3">Afegir un pelicula nou</a>
+	<a href="/peliculas/create" class="btn btn-success mb-3">Añadir una pelicula nueva</a>
 	<table class="table table-striped table-hover">
     	<thead class="table-dark">
         	<tr>
             	<th>Títol</th>
             	<th>ISBN</th>
-            	<th>Pàgines</th>
+            	<th>Duracion en minutos</th>
             	<th>Preu</th>
 				<th>Acciones</th>
         	</tr>
@@ -24,11 +24,12 @@
             	<tr>
                 	<td>{{ $pelicula->titol }}</td>
                 	<td>{{ $pelicula->isbn }}</td>
-                	<td>{{ $pelicula->pagines }}</td>
+                	<td>{{ $pelicula->duracion }}</td>
                 	<td>{{ $pelicula->preu }} €</td>
 					<td>
 						<a href="/peliculas/{{ $pelicula->id }}" class="btn btn-info btn-sm">Veure</a>
 						<a href="/peliculas/eliminar/{{ $pelicula->id }}" class="btn btn-info btn-sm">Eliminar</a>
+						<a href="/peliculas/editar/{{ $pelicula->id }}" class="btn btn-info btn-sm">Editar</a>
 					</td>
             	</tr>
         	@empty

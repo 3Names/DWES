@@ -10,7 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void {
-        Schema::table('llibres', function (Blueprint $table) {
+        Schema::table('peliculas', function (Blueprint $table) {
             // Afegim el camp per guardar el NOM del fitxer (string)
             $table->string('imatge')->nullable()->after('preu');
         });

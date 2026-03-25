@@ -10,7 +10,7 @@
         </div>
         <div class="col-md-8">
             <p><strong>ISBN:</strong> {{ $pelicula->isbn }}</p>
-            <p><strong>Pàgines:</strong> {{ $pelicula->pagines }}</p>
+            <p><strong>Duración:</strong> {{ $pelicula->duracion }}</p>
             <p><strong>Preu:</strong> {{ $pelicula->preu }} €</p>
             <a href="/peliculas" class="btn btn-secondary">Tornar</a>
         </div>

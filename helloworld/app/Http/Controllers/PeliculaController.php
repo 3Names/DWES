@@ -42,7 +42,7 @@ class PeliculaController extends Controller
 
         $nouPelicula->save();
 
-        return redirect('/Peliculas');
+        return redirect('/peliculas');
     }
     
     public function detalles($id)
@@ -65,49 +65,30 @@ class PeliculaController extends Controller
 
     public function editar($id)
     {
-        $Pelicula = Pelicula::findOrFail($id);
-
-        $nouPelicula->titol = $request->input('titol');
-        $nouPelicula->isbn = $request->input('isbn');
-        $nouPelicula->pagines = $request->input('pagines');
-        $nouPelicula->preu = $request->input('preu');
-        
-        if ($request->hasFile('imatge')) {
-            // Guardem la imatge a la carpeta 'public/portades'
-            $fitxer = $request->file('imatge');
-            $nomImatge = time() . '_' . $fitxer->getClientOriginalName();
-            $fitxer->move(public_path('portades'), $nomImatge);
-        
-            // Guardem el nom del fitxer a la base de dades
-            $nouPelicula->imatge = $nomImatge;
-        }
-
-        $nouPelicula->save();
-
-        return redirect('/Peliculas');
+        $pelicula = Pelicula::findOrFail($id);
+        return view('peliculas.update', compact('pelicula'));
     }
 
     public function update(Request $request,$id)
     {
-        $Pelicula = Pelicula::findOrFail($id);
+        $pelicula = Pelicula::findOrFail($id);
 
-        $Pelicula->titol = $request->input('titol');
-        $Pelicula->isbn = $request->input('isbn');
-        $Pelicula->pagines = $request->input('pagines');
-        $Pelicula->preu = $request->input('preu');
+        $pelicula->titol = $request->input('titol');
+        $pelicula->isbn = $request->input('isbn');
+        $pelicula->duracion = $request->input('duracion');
+        $pelicula->preu = $request->input('preu');
         
-        if ($request->hasFile('imatge')) {
-            // Guardem la imatge a la carpeta 'public/portades'
+        if ($request->hasFile('imatge')) 
+        {
             $fitxer = $request->file('imatge');
             $nomImatge = time() . '_' . $fitxer->getClientOriginalName();
             $fitxer->move(public_path('portades'), $nomImatge);
         
-            // Guardem el nom del fitxer a la base de dades
             $nouPelicula->imatge = $nomImatge;
         }
 
-        $nouPelicula->save();
+        $pelicula->save();
 
-        return redirect('/Peliculas');
+        return redirect('/peliculas');
     }
 }
