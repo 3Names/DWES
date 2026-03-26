@@ -102,4 +102,10 @@ class PeliculaController extends Controller
 
         return redirect('/peliculas');
     }
+
+    public function filtro() {
+        $peliculas = Pelicula::all();
+        $actores = \App\Models\Actor::all();
+        return view('actxpe.filtro', compact('peliculas'), compact('actores'));
+    }
 }

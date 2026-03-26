@@ -10,6 +10,8 @@
 	<h2 class="mb-4">Patricio Salazar Ccoa</h2>
 	<a href="/actores/create" class="btn btn-success mb-3">Añadir un actor nuevo</a>
 	<a href="/peliculas" class="btn btn-success mb-3">Ver peliculas</a>
+	<a href="/pexact" class="btn btn-success mb-3">Ver Peliculas por actores</a>
+	<a href="/actxpe" class="btn btn-success mb-3">Ver Actores por pelicula</a>
 	<table class="table table-striped table-hover">
     	<thead class="table-dark">
         	<tr>

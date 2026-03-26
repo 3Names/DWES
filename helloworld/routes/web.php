@@ -35,3 +35,6 @@ Route::get('/actores/{id}', [ActorController::class, 'detalles']);
 Route::get('/actores/eliminar/{id}', [ActorController::class, 'destroy']);
 Route::get('/actores/editar/{id}', [ActorController::class, 'editar']);
 Route::post('/actores/editar/{id}', [ActorController::class, 'update']);
+
+Route::get('/actxpe', [PeliculaController::class, 'filtro']);
+Route::get('/pexact', [ActorController::class, 'filtro']);

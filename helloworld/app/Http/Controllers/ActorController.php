@@ -72,4 +72,10 @@ class ActorController extends Controller
 
         return redirect('/actores');
     }
+
+    public function filtro() {
+        $peliculas = \App\Models\Pelicula::all();
+        $actores = Actor::all();
+        return view('pexact.filtro', compact('peliculas'), compact('actores'));
+    }
 }
