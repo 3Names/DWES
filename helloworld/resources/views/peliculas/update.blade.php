@@ -32,6 +32,16 @@
         </div>
 
         <div class="mb-3">
+            <label class="form-label">Selecciona els autors:</label>
+            <select name="actores[]" class="form-select" multiple>
+                @foreach($actores as $actor)
+                    <option value="{{ $actor->id }}">{{ $actor->nombre }}</option>
+                @endforeach
+            </select>
+            <small class="text-muted">Mantingues premut Ctrl per seleccionar-ne més d'un.</small>
+        </div>
+
+        <div class="mb-3">
             <label class="form-label">Portada actual</label>
             @if($pelicula->imatge)
                 <div class="mb-2">

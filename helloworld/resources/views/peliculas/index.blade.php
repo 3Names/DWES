@@ -9,6 +9,7 @@
 	<h1 class="mb-4">Llistat de peliculas</h1>
 	<h2 class="mb-4">Patricio Salazar Ccoa</h2>
 	<a href="/peliculas/create" class="btn btn-success mb-3">Añadir una pelicula nueva</a>
+	<a href="/actores" class="btn btn-success mb-3">Ver actores</a>
 	<table class="table table-striped table-hover">
     	<thead class="table-dark">
         	<tr>

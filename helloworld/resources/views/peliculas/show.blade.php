@@ -12,6 +12,12 @@
             <p><strong>ISBN:</strong> {{ $pelicula->isbn }}</p>
             <p><strong>Duración:</strong> {{ $pelicula->duracion }}</p>
             <p><strong>Preu:</strong> {{ $pelicula->preu }} €</p>
+            <p><strong>Actores:</strong></p>
+            <ul>
+                @foreach($pelicula->actores as $actor)
+                    <li>{{ $actor->nombre }}</li>
+                @endforeach
+            </ul>
             <a href="/peliculas" class="btn btn-secondary">Tornar</a>
         </div>
     </div>

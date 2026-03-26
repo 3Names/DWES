@@ -18,7 +18,8 @@ class PeliculaController extends Controller
 
     public function create() 
     {
-        return view('peliculas.create');
+        $actores = \App\Models\Actor::all();
+        return view('peliculas.create', compact('actores'));
     }
 
     public function guardar(Request $request)
@@ -42,6 +43,9 @@ class PeliculaController extends Controller
 
         $nouPelicula->save();
 
+        if ($request->has('actores')) {
+            $nouPelicula->actores()->attach($request->input('actores'));
+        }
         return redirect('/peliculas');
     }
     
@@ -66,7 +70,8 @@ class PeliculaController extends Controller
     public function editar($id)
     {
         $pelicula = Pelicula::findOrFail($id);
-        return view('peliculas.update', compact('pelicula'));
+        $actores = \App\Models\Actor::all();
+        return view('peliculas.update', compact('pelicula'), compact('actores'));
     }
 
     public function update(Request $request,$id)
@@ -88,6 +93,12 @@ class PeliculaController extends Controller
         }
 
         $pelicula->save();
+
+        if ($request->has('actores')) {
+            $pelicula->actores()->sync($request->input('actores'));
+        } else {
+            $pelicula->actores()->sync([]);
+        }
 
         return redirect('/peliculas');
     }
