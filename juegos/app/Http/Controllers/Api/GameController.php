@@ -21,6 +21,12 @@ class GameController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'titulo' => 'required|string|max:255',
+            'fecha_lanzamiento' => 'required|date',
+            'precio' => 'required|integer'
+        ]);
+
         return Game::create($request->all());
     }
 
@@ -29,6 +35,12 @@ class GameController extends Controller
      */
     public function show(string $id)
     {
+        $game = Game::find($id);
+
+        if (!$game) {
+            return response()->json(["message" => "No se encontro el juego"]);
+        }
+
         return Game::find($id);
     }
 
@@ -37,7 +49,18 @@ class GameController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $request->validate([
+            'titulo' => 'sometimes|required|string',
+            'fecha_lanzamiento' => 'sometimes|required|,' . $id,
+            'precio' => 'sometimes|required|integer'
+        ]);
+
         $game = Game::find($id);
+
+        if (!$game) {
+            return response()->json(["message" => "No se encontro el juego"]);
+        }
+
         $game->update($request->all());
         return $game;
     }
@@ -47,6 +70,12 @@ class GameController extends Controller
      */
     public function destroy(string $id)
     {
+        $game = Game::find($id);
+
+        if (!$game) {
+            return response()->json(["message" => "No se encontro el juego"]);
+        }
+
         return Game::destroy($id);
     }
 }
