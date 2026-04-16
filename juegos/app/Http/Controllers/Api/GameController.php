@@ -27,7 +27,9 @@ class GameController extends Controller
             'precio' => 'required|integer'
         ]);
 
-        return Game::create($request->all());
+        $game = Game::create($request->all());
+
+        return response()->json($game, 201);
     }
 
     /**
@@ -38,10 +40,10 @@ class GameController extends Controller
         $game = Game::find($id);
 
         if (!$game) {
-            return response()->json(["message" => "No se encontro el juego"]);
+            return response()->json(["message" => "No se encontro el juego"], 404);
         }
 
-        return Game::find($id);
+        return response()->json($game, 200);
     }
 
     /**
@@ -58,11 +60,11 @@ class GameController extends Controller
         $game = Game::find($id);
 
         if (!$game) {
-            return response()->json(["message" => "No se encontro el juego"]);
+            return response()->json(["message" => "No se encontro el juego"], 404);
         }
 
         $game->update($request->all());
-        return $game;
+        return response()->json($game, 200);
     }
 
     /**
@@ -73,9 +75,10 @@ class GameController extends Controller
         $game = Game::find($id);
 
         if (!$game) {
-            return response()->json(["message" => "No se encontro el juego"]);
+            return response()->json(["message" => "No se encontro el juego"], 404);
         }
+        $game->delete();
 
-        return Game::destroy($id);
+        return response()->json(null, 204);
     }
 }
