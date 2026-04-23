@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Game extends Model
 {
@@ -11,5 +12,9 @@ class Game extends Model
 
     public function distribuidor(): BelongsTo{
         return $this->belongsTo(Distribuidor::class);
+    }
+
+    public function plataforma(): BelongsToMany{
+        return $this->belongsToMany(Plataforma::class);
     }
 }

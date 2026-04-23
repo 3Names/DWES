@@ -13,7 +13,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        return Game::all();
+        // El mètode with('autor') fa que el JSON inclogui les dades de l'autor
+        return response()->json(Game::with('distribuidor')->get(), 200);
     }
 
     /**
@@ -80,5 +81,30 @@ class GameController extends Controller
         $game->delete();
 
         return response()->json(null, 204);
+    }
+
+    public function assignarDistribuidor(Request $request, $id) {
+        // 1. Busquem el llibre pel seu ID a la base de dades.
+        $game = Game::find($id);
+
+        // 2. Si no el trobem, retornem un error 404 immediatament per seguretat.
+        if (!$game) return response()->json(['message' => 'Juego no encontrado'], 404);
+
+        // 3. Validem que la petició porti un 'autor_id' i, el més important,
+        //	que aquest ID existeixi realment a la taula 'autors' (exists:autors,id).
+        $request->validate(['distribuidor_id' => 'required|exists:distribuidors,id']);
+
+        // 4. Assignem el nou ID de l'autor a la propietat 'autor_id' del model Llibre.
+        $game->distribuidor_id = $request->distribuidor_id;
+
+        // 5. Persistim el canvi a la base de dades (executa l'UPDATE a MySQL).
+        $game->save();
+
+        // 6. Retornem el llibre amb un mètode nou: load('autor').
+        //	Això "recarrega" l'objecte incloent tota la informació de l'autor que acabem d'assignar.
+        return response()->json([
+            'message' => 'Distribuidor assignat correctament',
+            'game' => $game->load('distribuidor')
+        ], 200);
     }
 }
