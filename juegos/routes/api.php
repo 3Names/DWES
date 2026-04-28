@@ -24,4 +24,6 @@ Route::post('/distribuidores', [DistribuidorController::class, 'store']);
 Route::put('/distribuidores/{id}', [DistribuidorController::class, 'update']);
 Route::delete('/distribuidores/{id}', [DistribuidorController::class, 'destroy']);
 
+Route::post('/games/{id}/plataformas', [GameController::class, 'assignarPlataforma']);
+
 

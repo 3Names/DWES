@@ -13,8 +13,8 @@ class GameController extends Controller
      */
     public function index()
     {
-        // El mètode with('autor') fa que el JSON inclogui les dades de l'autor
-        return response()->json(Game::with('distribuidor')->get(), 200);
+        // Carreguem tant l'autor (1-N) com les categories (M-N)
+        return response()->json(Game::with(['distribudor', 'plataformas'])->get(), 200);
     }
 
     /**
@@ -106,5 +106,25 @@ class GameController extends Controller
             'message' => 'Distribuidor assignat correctament',
             'game' => $game->load('distribuidor')
         ], 200);
+    }
+
+    public function assignarPlataforma(Request $request, $id) {
+        // Recuperem el llibre amb l’identificador
+        $game = Game::find($id);
+        // Si no existeix, retornem un missatge d’error
+        if (!$game) return response()->json(['message' => 'Juego no encontrado'], 404);
+        // Validem que ens arribi un array d'IDs de categories que existeixin
+        $request->validate([
+            'plataformas' => 'required|array',
+            'plataformas.*' => 'exists:plataforma_juego,id'
+        ]);
+
+        // El mètode sync() elimina les relacions antigues i posa les noves
+        $game->categories()->sync($request->plataformas);
+
+        return response()->json([
+            'message' => 'Plataformas actualitzades',
+            'game' => $game->load('plataformas')
+        ]);
     }
 }
