@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Plataforma extends Model
 {
-    public function plataforma(): BelongsToMany {
+    public function games(): BelongsToMany {
         return $this->belongsToMany(Game::class);
     }
 }
