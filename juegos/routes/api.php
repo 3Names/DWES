@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\DistribuidorController;
 use App\Http\Controllers\Api\GameController;
+use App\Http\Controllers\Api\PlataformaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +27,6 @@ Route::delete('/distribuidores/{id}', [DistribuidorController::class, 'destroy']
 
 Route::post('/games/{id}/plataformas', [GameController::class, 'assignarPlataforma']);
 
-
+Route::get('/plataformas', [PlataformaController::class, 'index']);
+Route::post('/plataformas', [PlataformaController::class, 'store']);
+Route::delete('/plataforma/{id}', [PlataformaController::class, 'destroy']);

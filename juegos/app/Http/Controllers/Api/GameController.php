@@ -14,7 +14,7 @@ class GameController extends Controller
     public function index()
     {
         // Carreguem tant l'autor (1-N) com les categories (M-N)
-        return response()->json(Game::with(['distribudor', 'plataformas'])->get(), 200);
+        return response()->json(Game::with(['distribuidor', 'plataformas'])->get(), 200);
     }
 
     /**
@@ -44,7 +44,7 @@ class GameController extends Controller
             return response()->json(["message" => "No se encontro el juego"], 404);
         }
 
-        return response()->json($game, 200);
+        return response()->json($game::with(['distribuidor', 'plataformas'])->get(), 200);
     }
 
     /**
@@ -116,11 +116,11 @@ class GameController extends Controller
         // Validem que ens arribi un array d'IDs de categories que existeixin
         $request->validate([
             'plataformas' => 'required|array',
-            'plataformas.*' => 'exists:plataforma_juego,id'
+            'plataformas.*' => 'exists:plataformas,id'
         ]);
 
         // El mètode sync() elimina les relacions antigues i posa les noves
-        $game->categories()->sync($request->plataformas);
+        $game->plataformas()->sync($request->plataformas);
 
         return response()->json([
             'message' => 'Plataformas actualitzades',

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Plataforma extends Model
 {
+    protected $fillable = ["nombre"];
     public function games(): BelongsToMany {
         return $this->belongsToMany(Game::class);
     }

@@ -14,7 +14,7 @@ class Game extends Model
         return $this->belongsTo(Distribuidor::class);
     }
 
-    public function plataforma(): BelongsToMany{
+    public function plataformas(): BelongsToMany{
         return $this->belongsToMany(Plataforma::class);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Plataforma;
 use Illuminate\Http\Request;
 
 class PlataformaController extends Controller
@@ -12,7 +13,7 @@ class PlataformaController extends Controller
      */
     public function index()
     {
-        //
+        return Plataforma::all();
     }
 
     /**
@@ -20,30 +21,25 @@ class PlataformaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'nombre' => 'required|string|max:255'
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $plataforma = Plataforma::create($request->all());
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
+        return response()->json($plataforma, 201);
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $plataforma = Plataforma::destroy($id);
+
+        if (!$plataforma) {
+            return response()->json(["message" => "Plataforma no encontrada"], 404);
+        }
+
+        return response()->json(null, 204);
     }
 }

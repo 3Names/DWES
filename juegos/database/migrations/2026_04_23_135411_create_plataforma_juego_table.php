@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plataforma_juego', function (Blueprint $table) {
+        Schema::create('game_plataforma', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('juego_id')->constrained()->onDelete('cascade');
+            $table->foreignId('game_id')->constrained()->onDelete('cascade');
             $table->foreignId('plataforma_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
