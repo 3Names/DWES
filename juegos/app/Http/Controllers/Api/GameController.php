@@ -11,10 +11,34 @@ class GameController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Carreguem tant l'autor (1-N) com les categories (M-N)
-        return response()->json(Game::with(['distribuidor', 'plataformas'])->get(), 200);
+        // 1. Iniciem la consulta carregant les relacions (Eager Loading)
+        $query = Game::with(['distribuidor', 'plataformas']);
+
+        // 2. FILTRE: Per títol (fent servir LIKE per a cerques parcials)
+        if ($request->filled('titulo')) {
+            $query->where('titulo', 'like', '%' . $request->titol . '%');
+        }
+
+        // 3. FILTRE: Per rang de pàgines
+        if ($request->filled('min_pagines')) {
+            $query->where('pagines', '>=', $request->min_pagines);
+        }
+
+        // 4. SELECCIÓ DE CAMPS: Permetre triar quines columnes volem
+        // Exemple: /api/llibres?camps=titol,isbn
+        if ($request->filled('camps')) {
+            $camps = explode(',', $request->camps);
+            $query->select($camps);
+        }
+
+        // 5. ORDENACIÓ: Permetre triar el camp i l'ordre (asc/desc)
+        $sortField = $request->get('ordenar_per', 'id');
+        $sortOrder = $request->get('ordre', 'asc');
+        $query->orderBy($sortField, $sortOrder);
+
+        return response()->json($query->get(), 200);
     }
 
     /**

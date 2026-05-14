@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\DistribuidorController;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\PlataformaController;
+use App\Http\Controllers\Api\PersonajeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,3 +31,11 @@ Route::post('/games/{id}/plataformas', [GameController::class, 'assignarPlatafor
 Route::get('/plataformas', [PlataformaController::class, 'index']);
 Route::post('/plataformas', [PlataformaController::class, 'store']);
 Route::delete('/plataforma/{id}', [PlataformaController::class, 'destroy']);
+
+
+Route::get('/personajes', [PersonajeController::class, 'index']);
+Route::get('/personajes/{id}', [PersonajeController::class, 'show']);
+Route::post('/personajes', [PersonajeController::class, 'store']);
+Route::put('/personajes/{id}', [PersonajeController::class, 'update']);
+Route::delete('/personajes/{id}', [PersonajeController::class, 'destroy']);
+Route::get('/personajes/especie/{especie}', [PersonajeController::class, 'filtro']);
